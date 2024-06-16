@@ -2,25 +2,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
     <head>
-        <style type="text/css">@import url(&quot;css/GameBoy.css&quot;);</style>
+        <style type="text/css">@import url("css/GameBoy.css");</style>
         <script type="text/javascript">
     var DEBUG_MESSAGES = false;
     var DEBUG_WINDOWING = false;
     window.onload = function () {
         windowingInitialize();
+        loadStandardGame();
     }
         </script>
-        <script type="text/javascript" src="js/other/windowStack.js"/>
-        <script type="text/javascript" src="js/other/terminal.js"/>
-        <script type="text/javascript" src="js/other/gui.js"/>
-        <script type="text/javascript" src="js/other/base64.js"/>
-        <script type="text/javascript" src="js/other/json2.js"/>
-        <script type="text/javascript" src="js/other/swfobject.js"/>
-        <script type="text/javascript" src="js/other/resampler.js"/>
-        <script type="text/javascript" src="js/other/XAudioServer.js"/>
-        <script type="text/javascript" src="js/other/resize.js"/>
-        <script type="text/javascript" src="js/GameBoyCore.js"/>
-        <script type="text/javascript" src="js/GameBoyIO.js"/>
+        <script type="text/javascript" src="js/other/windowStack.js"></script>
+        <script type="text/javascript" src="js/other/terminal.js"></script>
+        <script type="text/javascript" src="js/other/gui.js"></script>
+        <script type="text/javascript" src="js/other/base64.js"></script>
+        <script type="text/javascript" src="js/other/json2.js"></script>
+        <script type="text/javascript" src="js/other/swfobject.js"></script>
+        <script type="text/javascript" src="js/other/resampler.js"></script>
+        <script type="text/javascript" src="js/other/XAudioServer.js"></script>
+        <script type="text/javascript" src="js/other/resize.js"></script>
+        <script type="text/javascript" src="js/GameBoyCore.js"></script>
+        <script type="text/javascript" src="js/GameBoyIO.js"></script>
         <title>GameBoy Online</title>
     </head>
     <body>
@@ -32,13 +33,13 @@
                 <span id="GameBoy_about_menu">About</span>
             </div>
             <div id="gfx">
-                <canvas id="mainCanvas"/>
+                <canvas id="mainCanvas"></canvas>
                 <span id="title">GameBoy</span>
                 <span id="port_title">Online</span>
             </div>
         </div>
         <div id="terminal" class="window">
-            <div id="terminal_output"/>
+            <div id="terminal_output"></div>
             <div class="button_rack">
                 <button id="terminal_clear_button" class="left">Clear Messages</button>
                 <button id="terminal_close_button" class="right">Close Terminal</button>
@@ -47,8 +48,10 @@
         <div id="about" class="window">
             <div id="about_message">
                 <h1>GameBoy Online</h1>
-                <p>This is a GameBoy Color emulator written purely in JavaScript by Grant Galitz.</p><p>The graphics blitting is done through HTML5 canvas, with the putImageData and drawImage functions.</p><p>Save states are implemented through the window.localStorage object, and are serialized/deserialized through JSON. SRAM saving is also implemented through the window.localStorage object, and are serialized/deserialized through JSON. In order for save states to work properly on most browsers, you need set the maximum size limit for DOM storage higher, to meet the needs of the emulator's save data size.</p><p>For more information about this emulator and its source code, visit the GIT repository at: <a href="https://github.com/taisel/GameBoy-Online" target="_blank">https://github.com/taisel/GameBoy-Online</a>.
-                </p>
+                <p>This is a GameBoy Color emulator written purely in JavaScript by Grant Galitz.</p>
+                <p>The graphics blitting is done through HTML5 canvas, with the putImageData and drawImage functions.</p>
+                <p>Save states are implemented through the window.localStorage object, and are serialized/deserialized through JSON. SRAM saving is also implemented through the window.localStorage object, and are serialized/deserialized through JSON. In order for save states to work properly on most browsers, you need set the maximum size limit for DOM storage higher, to meet the needs of the emulator's save data size.</p>
+                <p>For more information about this emulator and its source code, visit the GIT repository at: <a href="https://github.com/taisel/GameBoy-Online" target="_blank">https://github.com/taisel/GameBoy-Online</a>.</p>
             </div>
             <div class="button_rack">
                 <button id="about_close_button" class="center">Close Popup</button>
@@ -137,25 +140,9 @@
                 <button id="instructions_close_button" class="center">Close Instructions</button>
             </div>
         </div>
-        <div id="input_select" class="window">
-            <form>
-                <input type="file" id="local_file_open"/>
-            </form>
-            <div class="button_rack">
-                <button id="input_select_close_button" class="center">Close File Input</button>
-            </div>
-        </div>
-        <div id="save_importer" class="window">
-            <form>
-                <input type="file" id="save_open"/>
-            </form>
-            <div class="button_rack">
-                <button id="save_importer_close_button" class="center">Close Save Importer</button>
-            </div>
-        </div>
         <div class="window" id="local_storage_listing">
             <div id="storageListingMasterContainer" class="storageList">
-                <div id="storageListingMasterContainerSub"/>
+                <div id="storageListingMasterContainerSub"></div>
             </div>
             <div id="download_all_storage">
                 <a href="about:blank" id="download_local_storage_dba">Export all saved data.</a>
@@ -167,7 +154,7 @@
         </div>
         <div class="window" id="local_storage_popup">
             <div id="storagePopupMasterParent" class="storageList">
-                <div id="storagePopupMasterContainer"/>
+                <div id="storagePopupMasterContainer"></div>
             </div>
             <div class="button_rack">
                 <button id="local_storage_popup_close_button" class="center">Close Storage Popup</button>
@@ -175,36 +162,20 @@
         </div>
         <div class="window" id="freeze_listing">
             <div id="freezeListingMasterContainer" class="storageList">
-                <div id="freezeListingMasterContainerSub"/>
+                <div id="freezeListingMasterContainerSub"></div>
             </div>
             <div class="button_rack">
                 <button id="freeze_list_refresh_button" class="left">Refresh List</button>
                 <button id="freeze_list_close_button" class="right">Close Freeze State List</button>
             </div>
         </div>
-        <ul class="menu" id="GameBoy_file_popup">
-            <li>Open As<ul class="menu">
-                <li id="data_uri_clicker">Base 64 Encoding</li>
-                <li id="internal_file_clicker">Local File</li>
-            </ul></li>
-            <li id="save_SRAM_state_clicker">Save Game Memory</li>
-            <li id="save_state_clicker">Save Freeze State</li>
-            <li id="set_volume">Set Volume</li>
-            <li id="set_speed">Set Speed</li>
-            <li id="restart_cpu_clicker">Restart</li>
-            <li id="run_cpu_clicker">Resume</li>
-            <li id="kill_cpu_clicker">Pause</li>
-        </ul>
-        <ul class="menu" id="GameBoy_view_popup">
-            <li id="view_terminal">Terminal</li>
-            <li id="view_instructions">Instructions</li>
-            <li id="view_importer">Save Importer</li>
-            <li id="local_storage_list_menu">Save Manager</li>
-            <li id="freeze_list_menu">Freeze State Manager</li>
-            <li id="view_fullscreen">Fullscreen Mode</li>
-        </ul>
-        <div id="fullscreenContainer">
-            <canvas id="fullscreen" class="maximum"/>
+        <div class="window" id="freeze_listing_popup">
+            <div id="freezePopupMasterParent" class="storageList">
+                <div id="freezePopupMasterContainer"></div>
+            </div>
+            <div class="button_rack">
+                <button id="freeze_popup_close_button" class="center">Close Freeze State Popup</button>
+            </div>
         </div>
     </body>
 </html>

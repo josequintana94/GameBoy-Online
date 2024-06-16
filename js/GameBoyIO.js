@@ -415,3 +415,42 @@ function initNewCanvasSize() {
 		}
 	}
 }
+
+function loadStandardGame() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'roms/pokemon_red.gb', true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function (e) {
+        if (this.status == 200) {
+            var arrayBuffer = this.response;
+            if (arrayBuffer) {
+                var byteArray = new Uint8Array(arrayBuffer);
+                startGame(byteArray);
+            }
+        }
+    };
+    xhr.send();
+}
+
+function startGame(byteArray) {
+    try {
+        initializeGameBoy();
+        GameBoyEmulator.openMBC(byteArray);
+        startEmulator();
+    } catch (error) {
+        console.error('Failed to load the game:', error);
+    }
+}
+
+function initializeGameBoy() {
+    // Initialization code for the GameBoy emulator
+}
+
+function startEmulator() {
+    // Code to start the emulator
+}
+
+// Remove the file input handling code
+function fileLoad() {
+    // Functionality for file load disabled.
+}
