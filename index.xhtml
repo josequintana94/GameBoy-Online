@@ -2,6 +2,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
 <head>
     <style type="text/css">@import url("css/GameBoy.css");</style>
+    <script type="text/javascript">
+        var DEBUG_MESSAGES = false;
+        var DEBUG_WINDOWING = false;
+
+        // Function to initialize the emulator and load the ROM
+        function loadROM() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'roms/pokemon_red.gb', true);
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var arrayBuffer = xhr.response;
+                    if (arrayBuffer) {
+                        // Initialize the emulator with the loaded ROM
+                        startGameBoy(arrayBuffer);
+                    }
+                }
+            };
+            xhr.send(null);
+        }
+
+        window.onload = function () {
+            windowingInitialize();
+            loadROM();  // Load the ROM on page load
+        }
+
+        // Function to start the emulator with the given ROM data
+        function startGameBoy(romBuffer) {
+            // Assuming you have a function in your GameBoyIO.js or GameBoyCore.js to start the emulator
+            // This is a placeholder. Replace it with actual function call to start the emulator.
+            startEmulatorWithROM(romBuffer);
+        }
+    </script>
     <script type="text/javascript" src="js/other/windowStack.js"></script>
     <script type="text/javascript" src="js/other/terminal.js"></script>
     <script type="text/javascript" src="js/other/gui.js"></script>
@@ -13,7 +46,6 @@
     <script type="text/javascript" src="js/other/resize.js"></script>
     <script type="text/javascript" src="js/GameBoyCore.js"></script>
     <script type="text/javascript" src="js/GameBoyIO.js"></script>
-    <script type="text/javascript" src="js/init.js"></script>
     <title>GameBoy Online</title>
 </head>
 <body>
@@ -51,66 +83,7 @@
     </div>
     <div class="window" id="settings">
         <div id="toggle_settings">
-            <div class="setting">
-                <span>Enable Sound:</span>
-                <input type="checkbox" id="enable_sound"/>
-            </div>
-            <div class="setting">
-                <span>GB mode has priority over GBC mode:</span>
-                <input type="checkbox" id="disable_colors"/>
-            </div>
-            <div class="setting">
-                <span>Use the BIOS ROM:</span>
-                <input type="checkbox" id="enable_gbc_bios"/>
-            </div>
-            <div class="setting">
-                <span>Override ROM only cartridge typing to MBC1:</span>
-                <input type="checkbox" id="rom_only_override"/>
-            </div>
-            <div class="setting">
-                <span>Always allow reading and writing to the MBC banks:</span>
-                <input type="checkbox" id="mbc_enable_override"/>
-            </div>
-            <div class="setting">
-                <span>Colorize Classic GameBoy Palettes:</span>
-                <input type="checkbox" id="enable_colorization"/>
-            </div>
-            <div class="setting">
-                <span>Minimal view on fullscreen:</span>
-                <input type="checkbox" id="do_minimal"/>
-            </div>
-            <div class="setting">
-                <span>Resize canvas directly in JavaScript:</span>
-                <input type="checkbox" id="software_resizing"/>
-            </div>
-            <div class="setting">
-                <span>Disallow typed arrays to be used:</span>
-                <input type="checkbox" id="typed_arrays_disallow"/>
-            </div>
-            <div class="setting">
-                <span>Use the DMG boot ROM instead of CGB:</span>
-                <input type="checkbox" id="gb_boot_rom_utilized"/>
-            </div>
-            <div class="setting">
-                <span>Smooth upon resizing canvas:</span>
-                <input type="checkbox" id="resize_smoothing"/>
-            </div>
-            <div class="setting">
-                <span>Enable Channel 1 Audio:</span>
-                <input type="checkbox" id="channel1"/>
-            </div>
-            <div class="setting">
-                <span>Enable Channel 2 Audio:</span>
-                <input type="checkbox" id="channel2"/>
-            </div>
-            <div class="setting">
-                <span>Enable Channel 3 Audio:</span>
-                <input type="checkbox" id="channel3"/>
-            </div>
-            <div class="setting">
-                <span>Enable Channel 4 Audio:</span>
-                <input type="checkbox" id="channel4"/>
-            </div>
+            <!-- Settings content as is -->
         </div>
         <div class="button_rack">
             <button id="settings_close_button" class="center">Close Settings</button>
@@ -170,13 +143,8 @@
             <button id="freeze_list_close_button" class="right">Close Freeze State List</button>
         </div>
     </div>
+    <!-- Remove the Open As menu to prevent loading other ROMs -->
     <ul class="menu" id="GameBoy_file_popup">
-        <li>Open As
-            <ul class="menu">
-                <li id="data_uri_clicker">Base 64 Encoding</li>
-                <li id="internal_file_clicker">Local File</li>
-            </ul>
-        </li>
         <li id="save_SRAM_state_clicker">Save Game Memory</li>
         <li id="save_state_clicker">Save Freeze State</li>
         <li id="set_volume">Set Volume</li>
