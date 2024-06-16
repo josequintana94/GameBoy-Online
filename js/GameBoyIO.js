@@ -379,7 +379,7 @@ function downloadFile(fileName, content) {
 }
 
 // Automatically load the Pokémon Red ROM
-fetch('pokemon_red.gb')
+fetch('../roms/pokemon_red.gb')
     .then(response => response.arrayBuffer())
     .then(buffer => {
         start(document.getElementById("emulator_target"), buffer);
