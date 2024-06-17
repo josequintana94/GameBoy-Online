@@ -526,5 +526,7 @@ ul.menu>li:hover>ul.menu {
 #playbutton {
 	width: 200px;
 	height: 50px;
-	margin-top: -20px;
+	margin-top: 420px;
+	margin-left: 43%;
+	font-weight: bold;
 }
