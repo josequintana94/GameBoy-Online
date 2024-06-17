@@ -51,7 +51,17 @@
 </head>
 
 <body>
-    <button onclick="loadDefaultRom()">Play</button>
+    <div id="banner">
+        <img id="banner-image" src="images/pokemonheader.gif" alt="GameBoy Online" />
+        <div id="header">
+            <h3>Now on Solana</h3>
+        </div>
+        <div id="social">
+            <a href="https://twitter.com/taisel" target="_blank"><img id="socialicon" src="images/twitter.png" alt="Twitter" /></a>
+            <a href="https://t.me/solana_pump_fun" target="_blank"><img id="socialicon" src="images/telegram.png" alt="Telegram" /></a>
+            <a href="https://t.me/solana_pump_fun" target="_blank"><img id="socialicon" src="images/pump_icon.png" alt="Pump Fun" /></a>
+        </div>
+    </div>
 
     <div id="GameBoy" class="window">
         <div class="menubar">
@@ -66,6 +76,8 @@
             <span id="port_title">Online</span>
         </div>
     </div>
+    <button id="playbutton" onclick="loadDefaultRom()">Play</button>
+   
     <div id="terminal" class="window">
         <div id="terminal_output" />
         <div class="button_rack">
