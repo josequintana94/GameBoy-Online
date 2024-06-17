@@ -52,7 +52,7 @@ div.window {
 }
 
 div#GameBoy {
-	min-height: 370px;
+	min-height: 350px;
 	min-width: 350px;
 }
 
@@ -148,7 +148,7 @@ div#gfx {
 	background-color: rgb(200, 50, 50);
 	background-repeat: repeat-x;
 	background-attachment: scroll;
-	background-image: url("../images/pokemongold.webp");
+	background-image: url("../images/croppedimage.png");
 
 }
 
